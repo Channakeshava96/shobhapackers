@@ -620,6 +620,11 @@ Why Visiting/Survey is necessary?
       const phoneNumber = document.getElementById("phoneNumber").value;
       const message = document.getElementById("message").value;
 
+      if (!firstName || !lastName || !email || !phoneNumber || !message) {
+    alert("Please fill in all the fields.");
+    return; // Stop form submission
+  }
+
       const response = await fetch("/submit-form", {
         method: "POST",
         headers: {
