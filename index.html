@@ -469,28 +469,28 @@ Why Visiting/Survey is necessary?
                   Get <span>Free Quotation</span>
                 </h2>
               </div>
-              <form action="">
+              <form id="contactForm" action="/submit-form" method="POST">
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <input type="text" class="form-control" placeholder="First Name" />
+                    <input type="text" class="form-control" placeholder="First Name" id="firstName"/>
                   </div>
                   <div class="form-group col-md-6">
-                    <input type="text" class="form-control" placeholder="Last Name" />
+                    <input type="text" class="form-control" placeholder="Last Name" id="lastName"/>
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <input type="email" class="form-control" placeholder="Email" />
+                    <input type="email" class="form-control" placeholder="Email" id="email" />
                   </div>
                   <div class="form-group col-md-6">
-                    <input type="text" class="form-control" placeholder="Phone Number" />
+                    <input type="text" class="form-control" placeholder="Phone Number" id="phoneNumber"/>
                   </div>
                 </div>
                 <div class="form-group ">
-                  <input type="text" class="message-box" placeholder="Message" />
+                  <input type="text" class="message-box" placeholder="Message" id="message"/>
                 </div>
                 <div class="btn-box">
-                  <button type="submit" class="submit_btn">
+                  <button type="submit" class="submit_btn" >
                     Send
                   </button>
                   <button id="showMap" class="map_btn">
@@ -609,6 +609,33 @@ Why Visiting/Survey is necessary?
   <!-- Google Map -->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
   <!-- End Google Map -->
+
+  <script>
+    document.getElementById("contactForm").addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const firstName = document.getElementById("firstName").value;
+      const lastName = document.getElementById("lastName").value;
+      const email = document.getElementById("email").value;
+      const phoneNumber = document.getElementById("phoneNumber").value;
+      const message = document.getElementById("message").value;
+
+      const response = await fetch("/submit-form", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ firstName, lastName, email, phoneNumber, message }),
+      });
+
+      if (response.ok) {
+        alert("Form submitted successfully!");
+      } else {
+        alert("Failed to submit the form. Please try again.");
+      }
+    });
+  </script>
+  
 </body>
 
 </html>
