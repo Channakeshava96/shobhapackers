@@ -1,0 +1,30 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "server.js",
+        "use": "@vercel/node"
+      },
+      {
+        "src": "contact.html",
+        "use": "@vercel/static"
+      },
+      {
+        "src": "css/**",
+        "use": "@vercel/static"
+      },
+      {
+        "src": "js/**",
+        "use": "@vercel/static"
+      },
+      {
+        "src": "images/**",
+        "use": "@vercel/static"
+      }
+    ],
+    "routes": [
+      { "src": "/submit-form", "dest": "/server.js" },
+      { "src": "/", "dest": "/contact.html" }
+    ]
+  }
+  
